@@ -1,0 +1,13 @@
+<h2>Other Music by <%= @music.artist %></h2>
+
+<% if @songs.empty? %>
+  <p>No other music found by this artist.</p>
+<% else %>
+  <ul>
+    <% @songs.each do |music| %>
+      <li><%= link_to music.title, music_path(music) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to 'Back to Music Details', music_path(@music), class: 'btn btn-secondary' %>

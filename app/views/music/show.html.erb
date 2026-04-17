@@ -1,0 +1,12 @@
+<h2><%= @music.title %></h2>
+
+<ul>
+  <li>Album: <%= @music.album %></li>
+  <li>Artist: <%= @music.artist %></li>
+  <li>Release Date: <%= @music.release_date&.strftime("%B %d, %Y") %></li>
+</ul>
+
+<%= link_to 'Edit', edit_music_path(@music), class: 'btn btn-primary' %>
+<%= button_to 'Delete', music_path(@music), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+<%= link_to 'Back', music_index_path, class: 'btn btn-secondary' %>
+<%= link_to 'Find Music With Same Artist', same_artist_music_path(@music), class: 'btn btn-info' %>

@@ -1,0 +1,28 @@
+<h2>Add New Music</h2>
+
+<%= form_with(model: @music, url: music_index_path, method: :post, local: true, scope: :music) do |f| %>
+  <div class="mb-3">
+    <%= f.label :title, 'Title', class: 'col-form-label' %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :album, 'Album', class: 'col-form-label' %>
+    <%= f.select :album, Music.distinct.pluck(:album).sort, { include_blank: 'Select an album' }, { class: 'form-control' } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :artist, 'Artist', class: 'col-form-label' %>
+    <%= f.text_field :artist, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :release_date, 'Released On', class: 'col-form-label' %>
+    <%= f.text_field :release_date, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.submit 'Save Changes', class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', music_index_path , class: 'btn btn-secondary' %>
+  </div>
+<% end %>

@@ -1,0 +1,28 @@
+Feature: Search for electronic music by genre
+
+  As a electronic music fan
+  So that I can find styles of music I like
+  I want to filter and search music by the same genre
+
+Background: music in database
+
+  Given the following music exists:
+  | title           | album              | artist                 | genre    | release_date |
+  | last rushup 10 M| Rushup Edge        | The Tuss               | IDM      | 2017-07-20   |
+  | Mangle 11       | Rephlexions        | Aphex Twin             | IDM      | 2003-11-03   |
+  | Papua New Guinea| Accelerator        | Future Sound of London | Ambient  | 1979-05-25   |
+  | Nothing is Real | Tomorrow's Harvest | Boards of Canada       | Ambient  | 2013-06-04   |
+  | Vordhosbn       | druqs              | Aphex Twin             | IDM      | 2001-10-22   |
+
+Scenario: add genre to existing music
+  When I go to the edit page for "last rushup 10 M"
+  And  I fill in "Genre" with "IDM"
+  And  I press "Update Music Info"
+  Then the genre of "last rushup 10 M" should be "IDM"
+
+Scenario: find music with same genre
+  Given I am on the details page for "Mangle 11"
+  When  I follow "Find Music With Same Genre"
+  Then  I should be on the Similar Music page for "Mangle 11"
+  And   I should see "last rushup 10 M"
+  But   I should not see "Papua New Guinea"

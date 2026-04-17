@@ -1,0 +1,30 @@
+<h2>All Music</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Album</th>
+      <th>Artist</th>
+      <th>Release Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each do |music| %>
+      <tr>
+        <td><%= music.title %></td>
+        <td><%= music.album %></td>
+        <td><%= music.artist %></td>
+        <td><%= music.release_date&.strftime("%B %d, %Y") %></td>
+        <td>
+          <%= link_to 'Show', music_path(music), class: 'btn btn-info btn-sm' %>
+          <%= link_to 'Edit', edit_music_path(music), class: 'btn btn-primary btn-sm' %>
+          <%= button_to 'Delete', music_path(music), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Add New Music', new_music_path, class: 'btn btn-success' %>

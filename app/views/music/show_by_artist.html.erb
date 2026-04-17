@@ -1,0 +1,24 @@
+<h2>Other Music by <%= @music.artist %></h2>
+
+<table class="table table-striped col-md-12" id="musics">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Album</th>
+      <th>Release Date</th>
+      <th>More Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @musics.each do |music| %>
+      <tr>
+        <td><%= music.title %></td>
+        <td><%= music.album %></td>
+        <td><%= music.release_date&.strftime("%B %d, %Y") %></td>
+        <td><%= link_to 'Find Music With Same Artist', same_artist_music_path(@music), class: 'btn btn-info' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back to Music Details', music_path(@music), class: 'btn btn-secondary' %>

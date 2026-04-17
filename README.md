@@ -1,138 +1,225 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/3SB7Xti_)
-<img src="./docs/ATU-Logo-Initial-English-RGB-Green--CROP.jpg" height=150>
+# Music Catalogue App
 
-# ATU Software Engineering Project
-### BSc (Hons) Computing in Software Development
+A Ruby on Rails web application for browsing and managing a catalogue of electronic music tracks. Built as part of the ATU BSc (Hons) Computing in Software Development programme, following Software as a Service (SaaS) and MVC principles, with comprehensive automated testing via Cucumber and RSpec.
 
-## Introduction
-The project will address the module learning outcomes by focusing on the following topics:
-- Software as a Service / Cloud Computing 
-- Web Application Architectures (MVC)
-- Software Development Frameworks
-- Database Management
-- Requirements Specification/Automated Acceptance Testing using Behaviour-Driven Development
-- Unit and Functional Testing
-- Test Coverage Metrics
+---
 
-## Requirements
-Using the Software Engineering principles mentioned above which were discussed in the lectures and lab assignments, you are required to create and deploy a web application using the Ruby on Rails framework, and write a comprenehsive suite of automated tests. You are free to come up with your own idea for what your application will do, but it can be broadly similar in style to the RottenPotatoes movie review sample application we worked on throughout the course (though obviously it must be different, i.e. not based on movies). In terms of functionality your application can be relatively simple. The focus here is not on building a complex feature-heavy application, but rather on building a simple application using solid engineering principles with thorough automated tests. Your application must conform to the specification detailed below.
+## Table of Contents
 
-### Specification 
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Database Schema](#database-schema)
+- [Getting Started](#getting-started)
+- [Running Tests](#running-tests)
+- [Deployment](#deployment)
+- [Project Structure](#project-structure)
 
-#### Functionality
-Your application should:
-- support basic CRUD operations on a single resource (e.g. similar to the create, read, update and delete operations on movies supported by RottenPotatoes).
-- support basic filtering and sorting functionality
-- include at least one **additional feature** beyond the features we developed in labs.
+---
 
-#### User Story
-The additional feature(s) you implement above and beyond CRUD and filtering/sorting should be documented as User Stories. The user story should be documented at the top of the Cucumber feature file for the feature.
- 
-#### Database
-Your application should:
-- use an SQL database in development and postgres in production (the relevant gems are included in the starter code). 
-- define a database schema in a Rails migration, which can be used to create a database using the `rake db:migrate` task.
-- define seed data which can be used to populate the database with initial data using the `rake db:seed` task.
+## Overview
 
-#### Testing
-Your application should include a comprehensive suite of automated tests, specifically:
-##### Cucumber
-- Cucumber BDD/Acceptance tests which verify the **additional feature** works as expected. Your cucumber tests should at a minimum include 2 scenarios, testing both the happy and sad paths of the feature. Comprehensive testing of the additional feature and of the filtering/sorting functionality will be necessary to score full marks for this component.
+The Music Catalogue App allows users to create, view, edit, and delete music tracks. Each track stores a title, album, artist, and release date. The app includes a key additional feature — **Find Music by Same Artist** — which lets users discover other tracks in the catalogue by the same artist directly from a track's detail page.
 
-##### RSpec
-- RSpec unit/functional tests for the controller and model. Your RSpec tests should test:
-  - the controller and model logic added to implement the **additional feature**.
-  - whatever other controller/model logic that needs to be tested to improve code coverage.
- ##### Code Coverage
-- The `simplecov` gem and necessary setup is included in the provided starter code. This will generate a detailed report of how well your code is covered by tests in `coverage/index.html`, as well as reporting the overall coverage percentage on the command line when `cucumber` and `rspec` tests are run. Use this coverage report to identify under-tested code that you need to write tests for. Note that 100% coverage isn't necessary, or even desirable. 10 marks are available for code coverage, according to the following scheme:
+---
 
+## Features
 
-Code Coverage Percentage| Marks |
-:---: | :---: |
-| >= 85 | 10 |
-| >= 70 | 8 |
-| >= 55 | 6 |
-| >= 40 | 4 |
-| >= 25 | 2 |
-| < 25 | 0 |
+### Core CRUD
+- **List** all music tracks on the home page
+- **View** full details of any track
+- **Add** new tracks via a form
+- **Edit** existing track information
+- **Delete** tracks from the catalogue
 
-**All tests should pass, or else should be skipped. Code coverage marks will be reduced by 50% if any tests are failing.**
+### Additional Feature — Same Artist Lookup
+From any track's detail page, users can click **"Find Music With Same Artist"** to see all other tracks in the catalogue by that artist. If no artist information is available for a track, the user is redirected to the home page with an informative flash message.
 
-#### Deployment
-- Your application should be deployed to Scalingo, complete with database and seeded with seed data. The URL to access your application on Scalingo should be included in the file [submission-scalingo-url.md](./submission-scalingo-url.md)
+### Seed Data
+The database is pre-seeded with a curated selection of electronic music:
 
-#### Documentation
-- Add a brief (1 paragraph) description of your project and a reflection on your experience building and testing it (a couple of paragraphs is fine) to the file [project-description.md](./project-description.md).
-- Your Cucumber tests should act as living documentation for your application. From reading the feature file(s) it should be clear what the additional feature is and how it works.
+| Title | Album | Artist | Release Date |
+|---|---|---|---|
+| last rushup 10 M | Rushup Edge | The Tuss | 2017-07-20 |
+| Mangle 11 | Rephlexions | Aphex Twin | 2003-11-03 |
+| Papua New Guinea | Accelerator | Future Sound of London | 1979-05-25 |
+| Nothing is Real | Tomorrow's Harvest | Boards of Canada | 2013-06-04 |
+| Vordhosbn | druqs | Aphex Twin | 2001-10-22 |
 
-## Starter Code
-The starter code in this repository includes a template Rails application which provides the following:
-- a Gemfile with most (if not all) of the framework and test dependencies you'll need
-- cucumber helper code and low-level step definitions for browser interaction (in `features/step_definitions/web_steps.rb`).
-- rspec helper code
-- various other useful things
+---
 
-**You should build your application by incrementally adding to the template application included here. All of your code should be in this repository.**
+## Tech Stack
 
-### Helper Guides
-- In setting up basic CRUD functionality, the "Hello Rails" lab where we built a rails app from scratch will be useful to you, specifically:
-    - Part 2: Creating a database and initial migration
-    - Part 3: Create CRUD routes, actions, and views
-- In setting up filtering and sorting, the Rails Intro lab will be useful to you.
-- In setting up cucumber and rspec tests, the final 2 labs will be useful to you.
+| Layer | Technology |
+|---|---|
+| Language | Ruby 3.3.8 |
+| Framework | Ruby on Rails 7.1 |
+| Database (dev/test) | SQLite3 |
+| Database (production) | PostgreSQL |
+| Testing (BDD) | Cucumber |
+| Testing (unit/functional) | RSpec |
+| Code Coverage | SimpleCov |
+| Containerisation | Docker |
+| Deployment | Scalingo |
 
-**Note**
-When running tests, it's best to run them within the environment of your current application, using `bundle exec`, e.g:
-- `bundle exec cucumber`
-- `bundle exec rspec`
+---
 
-### Rails CLI Cheat Sheet
-The Rails CLI is used for managing DBs, running a local development server, and generating code for controllers and tests. Full documentation for the Rails CLI is available [here](https://guides.rubyonrails.org/command_line.html). Some commonly used commands are provided below:
+## Database Schema
 
-| Test | Command |
-| --- | --- |
-| Run DB migration to set up development DB | `bundle exec rails db:migrate`|
-| Run DB migration to set up test DB | `bundle exec rails db:test:prepare`|
-| Add seed data to your DB (requires script in `db/seeds.rb`) | `bundle exec rails db:seed`|
-| Run rails server locally on Codio box | `rails server -b 0.0.0.0` |
+The app uses a single `musics` table:
 
-### Scalingo CLI Cheat Sheet
-The Scalingo command-line interface is pre-installed in your Codio workspace. Here's a collection of useful Scalingo command-line interface commands you'll likely need.
+| Column | Type |
+|---|---|
+| `id` | integer (primary key) |
+| `title` | string |
+| `album` | string |
+| `artist` | string |
+| `release_date` | date |
+| `created_at` | datetime |
+| `updated_at` | datetime |
 
-| Test | Command |
-| --- | --- |
-| Logging in to Scalingo CLI | `scalingo login`|
-| Create new Scalingo App | `scalingo create <globally-unique-app-name>` |
-| Add the postgresql-db addon to your app on Scalingo | `scalingo addons-add postgresql postgresql-starter-512` |
-| Deploy latest code to Scalingo | `git push scalingo master`|
-| Run DB migration to set up production DB schema on Scalingo | `scalingo run bundle exec rails db:migrate`|
-| Seed production DB schema on Scalingo | `scalingo run bundle exec rails db:seed`|
+---
 
-## Marking Scheme
-The project will be marked according to the following indicative marking scheme:
+## Getting Started
 
-Project Component | Marks
-:--- | :---: |
-| CRUD operations on a single resource |  10 |
-| Filtering and Sorting |  10 |
-| Additional feature | 15 |
-| User Story | 5 |
-| DB: Migration and seed data| 5 |
-| Cucumber BDD Acceptance Tests | 15 |
-| RSpec Unit/Functional Test | 15 |
-| Code Coverage | 10 |
-| Cloud Deployment (Scalingo) | 10 |
-| Project Description & Reflection | 5 |
-| **TOTAL** | **100** |
+### Prerequisites
 
+- Ruby 3.3.8
+- Bundler
+- SQLite3
 
-## Reference Documentation
-The [Rails documentation](https://guides.rubyonrails.org/v7.1.6/) is likely to be useful to you in solving problems you encounter. The `rails` command lineprovides tools with may be useful to you, some of which you've already used. Specifically, the `rails generate` command can be used to generate templates for various things like controllers, models, migrations etc., which is likely to be easier and less error-prone than creating these things by hand. Use of productivity tools like this is encouraged.
+### Setup
 
-## Submission
-By the submission date you are required to:
-- Add the Scalingo URL of your deployed application to the file [submission-scalingo-url.md](./submission-scalingo-url.md) in this repository.
-- Add a brief description of your project and a reflection of your experience building and testing it (a couple of paragraphs is fine) to the file [project-description.md](./project-description.md) file in this repository.
-- Ensure that all of your code is pushed to your repository on GitHub.
+```bash
+# Clone the repository
+git clone https://github.com/RyanCurley01/music-catalogue-app.git
+cd music-catalogue-app
 
-(Note that submitting your code to Moodle **is not necessary**. GitHub Classroom and Codio are being used to manage this assignment, and its tools allow me full access to your code).
+# Install dependencies
+bundle install
+
+# Set up and seed the database
+bundle exec rails db:migrate
+bundle exec rails db:seed
+
+# Start the development server
+rails server -b 0.0.0.0
+```
+
+Visit `http://localhost:3000` in your browser.
+
+---
+
+## Running Tests
+
+Always run tests using `bundle exec` to ensure the correct gem environment is used.
+
+```bash
+# Run Cucumber BDD acceptance tests
+bundle exec cucumber
+
+# Run RSpec unit and functional tests
+bundle exec rspec
+
+# Prepare the test database (if needed before running tests)
+bundle exec rails db:test:prepare
+```
+
+Code coverage reports are automatically generated by SimpleCov and saved to `coverage/index.html` after each test run.
+
+### Test Coverage
+
+| Coverage | Marks |
+|:---:|:---:|
+| ≥ 85% | 10 |
+| ≥ 70% | 8 |
+| ≥ 55% | 6 |
+| ≥ 40% | 4 |
+| ≥ 25% | 2 |
+| < 25% | 0 |
+
+> Note: marks are reduced by 50% if any tests are failing.
+
+---
+
+## Deployment
+
+The application is deployed to **Scalingo** with a PostgreSQL production database.
+
+### Useful Scalingo Commands
+
+```bash
+# Log in
+scalingo login
+
+# Create a new app
+scalingo create <globally-unique-app-name>
+
+# Add PostgreSQL addon
+scalingo addons-add postgresql postgresql-starter-512
+
+# Deploy
+git push scalingo master
+
+# Run migrations on production
+scalingo run bundle exec rails db:migrate
+
+# Seed production database
+scalingo run bundle exec rails db:seed
+```
+
+The live deployment URL is recorded in [`submission-scalingo-url.md`](./submission-scalingo-url.md).
+
+---
+
+## Project Structure
+
+```
+music-catalogue-app/
+├── app/
+│   ├── controllers/
+│   │   └── music_controller.rb     # CRUD + same_artist action
+│   ├── models/
+│   │   └── music.rb                # others_by_same_artist method
+│   └── views/music/                # ERB templates for all actions
+├── db/
+│   ├── migrate/                    # Database migrations
+│   ├── schema.rb
+│   └── seeds.rb                    # Seed data
+├── features/
+│   ├── music_by_artist.feature     # Cucumber BDD tests
+│   ├── rating_by_artist            # Rating feature tests
+│   └── step_definitions/           # Step definitions
+├── spec/
+│   ├── models/music_spec.rb        # RSpec model tests
+│   └── models/music_controller_spec.rb  # RSpec controller tests
+├── config/
+│   └── routes.rb                   # Routes including same_artist member route
+├── Dockerfile
+└── Gemfile
+```
+
+---
+
+## Routes
+
+| Method | Path | Action | Description |
+|---|---|---|---|
+| GET | `/` | `music#index` | List all tracks |
+| GET | `/music/new` | `music#new` | New track form |
+| POST | `/music` | `music#create` | Create a track |
+| GET | `/music/:id` | `music#show` | Track details |
+| GET | `/music/:id/edit` | `music#edit` | Edit form |
+| PATCH | `/music/:id` | `music#update` | Update a track |
+| DELETE | `/music/:id` | `music#destroy` | Delete a track |
+| GET | `/music/:id/same_artist` | `music#same_artist` | Find tracks by same artist |
+
+---
+
+## User Story — Same Artist Lookup
+
+> **As an** electronic music fan,  
+> **So that** I can find music with my favourite artist,  
+> **I want to** search for and view other tracks in the catalogue by the same artist.
+
+This feature is covered by Cucumber acceptance tests in `features/music_by_artist.feature`, including both happy path (artist found, results displayed) and sad path (no artist info, redirect with notice) scenarios.

@@ -16,4 +16,5 @@
 !/log/.keep
 /tmp
 
-/config/master.key/storage/*.sqlite3
+/config/master.key
+/storage/*.sqlite3

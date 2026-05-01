@@ -7,18 +7,19 @@ Feature: Search for electronic music by artists
 Background: music in database
 
   Given the following music exists:
-  | title           | album              | artist                 | release_date |
-  | last rushup 10 M| Rushup Edge        | The Tuss               |   2017-07-20 |
-  | Mangle 11       | Rephlexions        | Aphex Twin             |   2003-11-03 |
-  | Papua New Guinea| Accelerator        | Future Sound of London |   1979-05-25 |
-  | Nothing is Real | Tomorrow's Harvest | Boards of Canada       |   2013-06-04 |
-  | Vordhosbn       | Druqs              | Aphex Twin             |   2001-10-22 |
+  | title           | album              | artist                 | genre    | release_date | rating |
+  | Last Rushup 10  | Rushup Edge        | The Tuss               | IDM      | 2017-07-20   |    4   |
+  | Mangle 11       | Rephlexions        | Aphex Twin             | IDM      | 2003-11-03   |    2   |
+  | Papua New Guinea| Accelerator        | Future Sound of London | Ambient  | 1979-05-25   |    5   |
+  | Nothing is Real | Tomorrow's Harvest | Boards of Canada       | Ambient  | 2013-06-04   |    3   |
+  | Vordhosbn       | Druqs              | Aphex Twin             | IDM      | 2001-10-22   |    5   |
+  | Unknown         | Unknown            |                        | IDM      | 2000-01-01   |    3   |
 
 Scenario: add artist to existing music
-  When I go to the edit page for "last rushup 10 M"
+  When I go to the edit page for "Last Rushup 10"
   And  I fill in "Artist" with "The Tuss"
   And  I press "Update Music Info"
-  Then the artist of "last rushup 10 M" should be "The Tuss"
+  Then the artist of "Last Rushup 10" should be "The Tuss"
 
 Scenario: find music with same artist
   Given I am on the details page for "Mangle 11"
@@ -29,7 +30,7 @@ Scenario: find music with same artist
 
 Scenario: view list of all music
   Given I am on the home page
-  Then I should see "last rushup 10 M"
+  Then I should see "Last Rushup 10"
   And I should see "Mangle 11"
 
 Scenario: view details of a music
@@ -47,7 +48,13 @@ Scenario: add a new song
   And I should see "Can You Feel It"
 
 Scenario: delete a song
-  Given I am on the details page for "last rushup 10 M"
+  Given I am on the details page for "Last Rushup 10"
   When I press "Delete"
   Then I should be on the home page
-  And I should not see "last rushup 10 M"
+  And I should not see "Last Rushup 10"
+
+Scenario: music has no artist
+  Given I am on the details page for "Unknown"
+  When I follow "Find Music With Same Artist"
+  Then I should be on the home page
+  And I should see "'Unknown' has no artist info"

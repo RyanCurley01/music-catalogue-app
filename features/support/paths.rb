@@ -32,6 +32,9 @@ module NavigationHelpers
     when /^the Similar Music page for "([^"]+)"$/
       same_artist_music_path(Music.find_by_title!($1))
 
+    when /^the Similar Genre page for "([^"]+)"$/
+      same_genre_music_path(Music.find_by_title!($1))
+
     when /^the new music page$/
       new_music_path
 

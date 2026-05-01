@@ -1,12 +1,31 @@
 <h2><%= @music.title %></h2>
 
 <ul>
+  <li>Title: <%= @music.title %></li>
   <li>Album: <%= @music.album %></li>
   <li>Artist: <%= @music.artist %></li>
+  <li>Genre: <%= @music.genre %></li>
   <li>Release Date: <%= @music.release_date&.strftime("%B %d, %Y") %></li>
+  <li>Rating: <%= @music.rating %></li>
 </ul>
 
 <%= link_to 'Edit', edit_music_path(@music), class: 'btn btn-primary' %>
 <%= button_to 'Delete', music_path(@music), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-<%= link_to 'Back', music_index_path, class: 'btn btn-secondary' %>
+
+<br> 
+
 <%= link_to 'Find Music With Same Artist', same_artist_music_path(@music), class: 'btn btn-info' %>
+<%= link_to 'Find Music With Same Genre', same_genre_music_path(@music), class: 'btn btn-info' %>
+
+<br> 
+
+<%= link_to 'Back To Home', music_index_path, class: 'btn btn-secondary' %>
+
+<h3>Update Rating</h3>
+
+<%= form_with model: @music, url: music_path(@music), method: :patch, local: true do |f| %>
+  <%= f.label :rating, "Rating" %>
+  <%= f.number_field :rating %>
+
+  <%= f.submit "Update Music Info" %>
+<% end %>

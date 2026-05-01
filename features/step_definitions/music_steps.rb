@@ -5,8 +5,6 @@ Given(/the following music exist/) do |music_table|
 end
 
 Then(/I should see "(.*)" before "(.*)"/) do |e1, e2|
-  # ensure that that e1 occurs before e2.
-  # page.body is the entire content of the page as a string.
   expect(page.body.index(e1) < page.body.index(e2))
 end
 
@@ -17,7 +15,6 @@ When(/I (un)?check the following ratings: (.*)/) do |uncheck, rating_list|
 end
 
 Then(/I should see all the music/) do
-  # Make sure that all the movies in the app are visible in the table
   Music.all.each do |music|
     step %(I should see "#{music.title}")
   end
@@ -26,4 +23,24 @@ end
 Then(/^the artist of "([^"]*)" should be "([^"]*)"$/) do |title, artist|
   music = Music.find_by(title: title)
   expect(music.artist).to eq(artist)
+end
+
+Then(/^the genre of "([^"]*)" should be "([^"]*)"$/) do |title, genre|
+  music = Music.find_by(title: title)
+  expect(music.genre).to eq(genre)
+end
+
+Then(/^the rating of "([^"]*)" should be "([^"]*)"$/) do |title, rating|
+  music = Music.find_by(title: title)
+  expect(music.rating).to eq(rating.to_i)
+end
+
+
+Given('the following songs exist:') do |table|
+  table.hashes.each do |song|
+    Music.create!(
+      title: song['title'],
+      rating: song['rating'] || 3
+    )
+  end
 end

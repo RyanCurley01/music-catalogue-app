@@ -8,17 +8,17 @@ Background: music in database
 
   Given the following music exists:
   | title           | album              | artist                 | genre    | release_date | rating |
-  | last rushup 10 M| Rushup Edge        | The Tuss               | IDM      | 2017-07-20   |    4   |
+  | Last Rushup 10  | Rushup Edge        | The Tuss               | IDM      | 2017-07-20   |    4   |
   | Mangle 11       | Rephlexions        | Aphex Twin             | IDM      | 2003-11-03   |    2   |
   | Papua New Guinea| Accelerator        | Future Sound of London | Ambient  | 1979-05-25   |    5   |
   | Nothing is Real | Tomorrow's Harvest | Boards of Canada       | Ambient  | 2013-06-04   |    3   |
-  | Vordhosbn       | druqs              | Aphex Twin             | IDM      | 2001-10-22   |    5   |
+  | Vordhosbn       | Druqs              | Aphex Twin             | IDM      | 2001-10-22   |    5   |
 
 Scenario: add rating to existing music
-  When I go to the edit page for "last rushup 10 M"
+  When I go to the edit page for "Last Rushup 10"
   And  I fill in "Rating" with "4"
   And  I press "Update Music Info"
-  Then the rating of "last rushup 10 M" should be "4"
+  Then the rating of "Last Rushup 10" should be "4"
 
 Scenario: find music with top rating
   Given I am on the home page
@@ -32,3 +32,10 @@ Scenario: update rating to existing music
   When I fill in "Rating" with "5"
   And I press "Update Music Info"
   Then the rating of "Mangle 11" should be "5"
+
+Scenario: no music matches selected rating
+  Given I am on the home page
+  When I select "1" from "Rating"
+  And I press "Search"
+  Then I should not see "Mangle 11"
+  And I should not see "Vordhosbn"

@@ -1,0 +1,40 @@
+<style>
+  table th, table td {
+    padding: 8px;
+  }
+</style>
+
+<h2>Similar music to <%= @music.genre %></h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Album</th>
+      <th>Artist</th>
+      <th>Genre</th>
+      <th>Release Date</th>
+      <th>Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each do |music| %>
+      <tr>
+        <td><%= music.title %></td>
+        <td><%= music.album %></td>
+        <td><%= music.artist %></td>
+        <td><%= link_to music.genre, music_path(music) %></td>
+        <td><%= music.release_date&.strftime("%B %d, %Y") %></td>
+        <td><%= music.rating %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<% if @songs.empty? %>
+  <p>No other genre found by this artist.</p>
+<% else %><br>
+<% end %>
+
+<%= link_to 'Back To Home', music_path(@music), class: 'btn btn-secondary' %>

@@ -77,7 +77,7 @@ The database is pre-seeded with a curated selection of electronic music:
 
 ## Database Schema
 
-The app uses a single `musics` table:
+The app uses a single `music` table:
 
 | Column | Type |
 |---|---|
